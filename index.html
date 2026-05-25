@@ -18,6 +18,26 @@
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
 
+    <div id="welcome-overlay" class="welcome-overlay">
+        <div class="welcome-content">
+            <h1 class="welcome-title">Welcome</h1>
+            <p class="welcome-subtitle">A Collection of Moments</p>
+            <button id="welcome-btn" class="welcome-btn">Enter</button>
+        </div>
+
+        <form id="login-form" class="login-form hidden" autocomplete="off">
+            <label for="login-username" class="sr-only">Username</label>
+            <input id="login-username" name="username" class="login-input" type="text" placeholder="Username" required>
+
+            <label for="login-password" class="sr-only">Password</label>
+            <input id="login-password" name="password" class="login-input" type="password" placeholder="Password" required>
+
+            <div id="login-error" class="login-error hidden"></div>
+
+            <button type="submit" class="welcome-btn">Sign in</button>
+        </form>
+    </div>
+
     <header>
         <nav>
             <div class="logo">Lujain</div>
@@ -26,6 +46,7 @@
                 <li><a href="#about">The Vibe</a></li>
                 <li><a href="#message">Note</a></li>
             </ul>
+            <button id="logout-btn" class="logout-btn hidden">Logout</button>
         </nav>
     </header>
 
@@ -114,9 +135,9 @@
                     <span class="subtitle">03 / Mol7za</span>
                     <h2>L aktr 7ad ghale 3nde.</h2>
                     <p>khleke kda 3lshan ante a7sn w7da w andf w agml 7aga shoftaha aw dkhlt hyate gmela w mo7trma w qwya w shtra w zakya ante agml w7da.</p>
-                    <button class="btn-primary" id="surprise-btn">Click for a small thing</button>
+                    <button class="btn-primary" id="surprise-btn">Dose hana ya lola</button>
                     <div id="surprise-content" class="hidden">
-                        <p class="surprise-text">"You're doing great. Keep going."</p>
+                        <p class="surprise-text">"kol sana w ante m3aya w gnbe kol sana w ante tyba ya hbebtalbe."</p>
                     </div>
                 </div>
             </div>
@@ -126,7 +147,7 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <p>&copy; 2024 / Built with care.</p>
+                <p>&copy; lujaun.</p>
                 <div class="social-links">
                     <span>Forever.</span>
                 </div>

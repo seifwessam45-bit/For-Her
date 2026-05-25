@@ -1,4 +1,68 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Welcome & Login Handler
+    const welcomeOverlay = document.getElementById('welcome-overlay');
+    const welcomeBtn = document.getElementById('welcome-btn');
+    const loginForm = document.getElementById('login-form');
+    const loginUsername = document.getElementById('login-username');
+    const loginPassword = document.getElementById('login-password');
+    const loginError = document.getElementById('login-error');
+    const logoutBtn = document.getElementById('logout-btn');
+
+    const allowedUsers = {
+        'Lujain S': '1162003',
+        'Seif W': '11192004'
+    };
+
+    // Show login form when user clicks Enter
+    welcomeBtn.addEventListener('click', () => {
+        document.querySelector('.welcome-content').classList.add('hidden');
+        loginForm.classList.remove('hidden');
+        loginUsername.focus();
+    });
+
+    // Handle login submit — check one of two user/password pairs
+    loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        loginError.classList.add('hidden');
+        const u = loginUsername.value.trim();
+        const p = loginPassword.value.trim();
+
+        if (!u || !p) {
+            loginError.textContent = 'Please enter both username and password.';
+            loginError.classList.remove('hidden');
+            return;
+        }
+
+        if (!allowedUsers[u] || allowedUsers[u] !== p) {
+            loginError.textContent = 'Invalid username or password.';
+            loginError.classList.remove('hidden');
+            return;
+        }
+
+        // Show logout button and dismiss overlay
+        if (logoutBtn) logoutBtn.classList.remove('hidden');
+        welcomeOverlay.style.animation = 'welcomeFadeOut 0.6s ease forwards';
+        setTimeout(() => {
+            welcomeOverlay.classList.add('hidden');
+        }, 600);
+    });
+
+    // Logout behavior: show welcome overlay again and clear inputs
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            // Show the overlay and display the sign-in form directly
+            welcomeOverlay.classList.remove('hidden');
+            document.querySelector('.welcome-content').classList.add('hidden');
+            loginForm.classList.remove('hidden');
+            loginUsername.value = '';
+            loginPassword.value = '';
+            loginError.classList.add('hidden');
+            // hide logout until next successful login
+            logoutBtn.classList.add('hidden');
+            loginUsername.focus();
+        });
+    }
+
     // Custom Cursor
     const cursor = document.querySelector('.cursor');
     const follower = document.querySelector('.cursor-follower');
@@ -86,4 +150,100 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     `;
     document.head.appendChild(style);
+
+    // Modal preview for memory cards
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalText = document.getElementById('modal-text');
+    const modalMedia = document.querySelector('.modal-media');
+    const modalClose = document.querySelector('.modal-close');
+    const modalEditBtn = document.getElementById('modal-edit');
+    const modalSaveBtn = document.getElementById('modal-save');
+    const modalCancelBtn = document.getElementById('modal-cancel');
+    const modalTextarea = document.getElementById('modal-textarea');
+    let currentCard = null;
+
+    function openModalForCard(card) {
+        const titleEl = card.querySelector('.card-info h3');
+        const textEl = card.querySelector('.card-info p');
+        modalTitle.textContent = titleEl ? titleEl.textContent : '';
+        modalText.textContent = textEl ? textEl.textContent : '';
+        modalTextarea.value = textEl ? textEl.textContent : '';
+        currentCard = card;
+        // reset edit UI
+        modalTextarea.classList.add('hidden');
+        modalText.classList.remove('hidden');
+        if (modalEditBtn) modalEditBtn.classList.remove('hidden');
+        if (modalSaveBtn) modalSaveBtn.classList.add('hidden');
+        if (modalCancelBtn) modalCancelBtn.classList.add('hidden');
+
+        // Show image if present
+        const img = card.querySelector('img.card-image');
+        if (img && img.src) {
+            modalMedia.innerHTML = `<img src="${img.src}" alt="${modalTitle.textContent}" class="modal-image">`;
+        } else {
+            const cardImageDiv = card.querySelector('.card-image');
+            if (cardImageDiv) {
+                const bg = window.getComputedStyle(cardImageDiv).backgroundImage;
+                if (bg && bg !== 'none') {
+                    modalMedia.innerHTML = `<div class="modal-image-bg" style="background-image: ${bg};"></div>`;
+                } else {
+                    modalMedia.innerHTML = '';
+                }
+            } else {
+                modalMedia.innerHTML = '';
+            }
+        }
+
+        modal.classList.remove('hidden');
+        setTimeout(() => modal.classList.add('open'), 10);
+    }
+
+    function closeModal() {
+        modal.classList.remove('open');
+        setTimeout(() => modal.classList.add('hidden'), 250);
+    }
+
+    // Edit / Save / Cancel logic
+    function enterEditMode() {
+        modalTextarea.classList.remove('hidden');
+        modalText.classList.add('hidden');
+        if (modalEditBtn) modalEditBtn.classList.add('hidden');
+        if (modalSaveBtn) modalSaveBtn.classList.remove('hidden');
+        if (modalCancelBtn) modalCancelBtn.classList.remove('hidden');
+        modalTextarea.focus();
+    }
+
+    function exitEditMode(save) {
+        if (save && currentCard) {
+            const newText = modalTextarea.value;
+            modalText.textContent = newText;
+            const cardText = currentCard.querySelector('.card-info p');
+            if (cardText) cardText.textContent = newText;
+        }
+        modalTextarea.classList.add('hidden');
+        modalText.classList.remove('hidden');
+        if (modalEditBtn) modalEditBtn.classList.remove('hidden');
+        if (modalSaveBtn) modalSaveBtn.classList.add('hidden');
+        if (modalCancelBtn) modalCancelBtn.classList.add('hidden');
+    }
+
+    document.querySelectorAll('.memory-card').forEach(card => {
+        card.addEventListener('click', () => openModalForCard(card));
+    });
+
+    if (modalEditBtn) modalEditBtn.addEventListener('click', enterEditMode);
+    if (modalCancelBtn) modalCancelBtn.addEventListener('click', () => exitEditMode(false));
+    if (modalSaveBtn) modalSaveBtn.addEventListener('click', () => exitEditMode(true));
+    // Save on Ctrl/Cmd+Enter
+    if (modalTextarea) modalTextarea.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+            exitEditMode(true);
+        }
+    });
+
+    if (modalClose) modalClose.addEventListener('click', closeModal);
+    const modalBackdrop = document.querySelector('.modal-backdrop');
+    if (modalBackdrop) modalBackdrop.addEventListener('click', closeModal);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 });
