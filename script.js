@@ -13,6 +13,57 @@ document.addEventListener('DOMContentLoaded', () => {
         'Seif W': '11192004'
     };
 
+    const countdownDate = document.getElementById('countdown-date');
+    const countdownDisplay = document.getElementById('countdown-display');
+    let countdownInterval = null;
+
+    function formatCountdownValue(value) {
+        return String(value).padStart(2, '0');
+    }
+
+    function updateCountdown(targetTime) {
+        const now = new Date();
+        const diff = targetTime - now;
+
+        if (diff <= 0) {
+            countdownDisplay.textContent = 'The selected date has arrived!';
+            clearInterval(countdownInterval);
+            countdownInterval = null;
+            return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        countdownDisplay.textContent = `${formatCountdownValue(days)}d ${formatCountdownValue(hours)}h ${formatCountdownValue(minutes)}m ${formatCountdownValue(seconds)}s`;
+    }
+
+    function startCountdown(dateValue) {
+        if (!dateValue) {
+            countdownDisplay.textContent = 'Choose a date above to see the countdown.';
+            return;
+        }
+
+        const targetDate = new Date(dateValue + 'T00:00:00');
+        if (Number.isNaN(targetDate.getTime())) {
+            countdownDisplay.textContent = 'Please choose a valid date.';
+            return;
+        }
+
+        if (countdownInterval) {
+            clearInterval(countdownInterval);
+        }
+
+        updateCountdown(targetDate);
+        countdownInterval = setInterval(() => updateCountdown(targetDate), 1000);
+    }
+
+    if (countdownDate.value) {
+        startCountdown(countdownDate.value);
+    }
+
     // Show login form when user clicks Enter
     welcomeBtn.addEventListener('click', () => {
         document.querySelector('.welcome-content').classList.add('hidden');

@@ -146,6 +146,29 @@ body {
     font-size: 1rem;
 }
 
+.countdown-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.countdown-label {
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.countdown-display {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    padding: 0.8rem 1rem;
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+    background: rgba(255,255,255,0.03);
+}
+
 .login-input::placeholder {
     color: var(--text-secondary);
 }
