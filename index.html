@@ -19,9 +19,13 @@
     <div class="cursor-follower"></div>
 
     <div id="welcome-overlay" class="welcome-overlay">
+        <!-- Ambient Glowing Blobs -->
+        <div class="welcome-glow-blob blob-1"></div>
+        <div class="welcome-glow-blob blob-2"></div>
+
         <div class="welcome-content">
-            <h1 class="welcome-title">Welcome</h1>
-            <p class="welcome-subtitle">A Collection of Moments</p>
+            <h1 class="welcome-title">Ahlan</h1>
+            <p class="welcome-subtitle">Ale htshofeh gow m3mol bkol l7za 7lwa m3ake</p>
             <button id="welcome-btn" class="welcome-btn">Enter</button>
         </div>
 
@@ -36,7 +40,8 @@
             <input id="login-username" name="username" class="login-input" type="text" placeholder="Username" required>
 
             <label for="login-password" class="sr-only">Password</label>
-            <input id="login-password" name="password" class="login-input" type="password" placeholder="Password" required>
+            <input id="login-password" name="password" class="login-input" type="password" placeholder="Password"
+                required>
 
             <div id="login-error" class="login-error hidden"></div>
 
@@ -51,6 +56,7 @@
                 <li><a href="#memories">Story</a></li>
                 <li><a href="#about">The Vibe</a></li>
                 <li><a href="#message">Note</a></li>
+                <li><a href="#wgod">Wgod</a></li>
             </ul>
             <button id="logout-btn" class="logout-btn hidden">Logout</button>
         </nav>
@@ -80,21 +86,24 @@
                         <img src="images/her-photo.jpg.jpg" class="card-image">
                         <div class="card-info">
                             <h3>Bdya</h3>
-                            <p>Bdayt hobe leke lma shoft d7ktk w m3rftsh eh ale 7sle fe s3tha bas 7sat ane 3yz ab2a m3ake dyman w bass 3lake fe kol mkan ante feh.</p>
+                            <p>Bdayt hobe leke lma shoft d7ktk w m3rftsh eh ale 7sle fe s3tha bas 7sat ane 3yz ab2a
+                                m3ake dyman w bass 3lake fe kol mkan ante feh.</p>
                         </div>
                     </div>
-                    <div class="memory-card" data-tilt> 
+                    <div class="memory-card" data-tilt>
                         <img src="images/her2-photo.jpg.jpg" class="card-image">
                         <div class="card-info">
                             <h3>Yome M3ake</h3>
-                            <p>Yome m3ake kan byb2a a7la w agml mn ayame al 3dya bb2a 3yzk m3aya 3la tol w mtghbesh 3an 3ane l7za.</p>
+                            <p>Yome m3ake kan byb2a a7la w agml mn ayame al 3dya bb2a 3yzk m3aya 3la tol w mtghbesh 3an
+                                3ane l7za.</p>
                         </div>
                     </div>
                     <div class="memory-card" data-tilt>
                         <img src="images/her1-photo.jpg.jpg" class="card-image">
                         <div class="card-info">
                             <h3>L7za</h3>
-                            <p>Kant l7za lma shoftk btbosele bnazra mokhtlfa 3an al nas al 3dya l7za fr2 ban ane mo3dg beke w ban ane bhbk.</p>
+                            <p>Kant l7za lma shoftk btbosele bnazra mokhtlfa 3an al nas al 3dya l7za fr2 ban ane mo3dg
+                                beke w ban ane bhbk.</p>
                         </div>
                     </div>
                     <div class="memory-card" data-tilt>
@@ -114,7 +123,9 @@
                     <div class="vibe-text">
                         <span class="subtitle">02 / Tfselk</span>
                         <h2>Tfsel soghyra bas tasrha kber.</h2>
-                        <p>bhb bsatk lya w tre2t hobk lya feke tfsel 7lwa wshk 7rkt edake d7ktk bhb klmna blal 7ata lw msh bnaol 7aga 3dla aw mofeda w brdo lma bnskot bb2a mrta7 w ana bwgodk gnbe bb2a mtmen w albe w 3a2le byhdo.</p>
+                        <p>bhb bsatk lya w tre2t hobk lya feke tfsel 7lwa wshk 7rkt edake d7ktk bhb klmna blal 7ata lw
+                            msh bnaol 7aga 3dla aw mofeda w brdo lma bnskot bb2a mrta7 w ana bwgodk gnbe bb2a mtmen w
+                            albe w 3a2le byhdo.</p>
                         <div class="vibe-stats">
                             <div class="stat">
                                 <span class="number">100%</span>
@@ -128,7 +139,7 @@
                     </div>
                     <div class="vibe-visual">
                         <div class="story-image-container">
-                            <img src="images/her4-photo.jpg.jpg" alt="Our story" class="story-image">
+                            <img src="images/her5-photo.jpg.jpg" alt="Our story" class="story-image">
                         </div>
                     </div>
                 </div>
@@ -140,10 +151,40 @@
                 <div class="glass-card">
                     <span class="subtitle">03 / Mol7za</span>
                     <h2>L aktr 7ad ghale 3nde.</h2>
-                    <p>khleke kda 3lshan ante a7sn w7da w andf w agml 7aga shoftaha aw dkhlt hyate gmela w mo7trma w qwya w shtra w zakya ante agml w7da.</p>
+                    <p>khleke kda 3lshan ante a7sn w7da w andf w agml 7aga shoftaha aw dkhlt hyate gmela w mo7trma w
+                        qwya w shtra w zakya ante agml w7da.</p>
                     <button class="btn-primary" id="surprise-btn">Dose hana ya lola</button>
                     <div id="surprise-content" class="hidden">
                         <p class="surprise-text">"kol sana w ante m3aya w gnbe kol sana w ante tyba ya hbebtalbe."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="wgod" class="wgod-section">
+            <div class="container">
+                <div class="wgod-card">
+                    <span class="subtitle">04 / Wgod</span>
+                    <h2>Wgodk fe hyate fe3lan a7la 7aga.</h2>
+                    <p class="wgod-p">wgodk fe hyate bykhle kol 7aga leha lzma wbtmny dyman nfdal gnb b3d. Ante fe3lan
+                        agml ne3ma rabna w7bha lya w kol l7za m3ake kanet fr2a gwa 2lby.</p>
+
+                    <div class="wgod-interactive-grid">
+                        <div class="wgod-interactive-item">
+                            <span class="wgod-icon">✨</span>
+                            <h4>R7et baly</h4>
+                            <p>wgodk byhdy albe w3a2ly fe a3b yome</p>
+                        </div>
+                        <div class="wgod-interactive-item">
+                            <span class="wgod-icon">❤️</span>
+                            <h4>Da3m la nehayee</h4>
+                            <p>ante dyman wa2fa gnby w bts3deny</p>
+                        </div>
+                        <div class="wgod-interactive-item">
+                            <span class="wgod-icon">🌸</span>
+                            <h4>D7ktna</h4>
+                            <p>d7ktk btkhly kol 7aga sahlah wgmela</p>
+                        </div>
                     </div>
                 </div>
             </div>

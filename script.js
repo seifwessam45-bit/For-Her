@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginPassword = document.getElementById('login-password');
     const loginError = document.getElementById('login-error');
     const logoutBtn = document.getElementById('logout-btn');
+    const loginMessage = document.getElementById('login-message');
+    const continueBtn = document.getElementById('continue-btn');
 
     const allowedUsers = {
         'Lujain S': '1162003',
@@ -92,6 +94,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Show logout button and dismiss overlay
         if (logoutBtn) logoutBtn.classList.remove('hidden');
+        if (loginMessage) {
+            loginMessage.classList.remove('hidden');
+            loginMessage.querySelector('h2').textContent = `أهلاً ${u}!`;
+            loginMessage.querySelector('p:nth-of-type(1)').textContent = 'لقد تم تسجيل الدخول بنجاح، وها هو الموقع في انتظارك ليستكشفه قلبك.';
+            loginMessage.querySelector('p:nth-of-type(2)').textContent = 'اضغط على الزر لتظهر لك باقي الصفحات، الصور، و الكلمات اللي جهزتها خصيصاً.';
+        }
         welcomeOverlay.style.animation = 'welcomeFadeOut 0.6s ease forwards';
         setTimeout(() => {
             welcomeOverlay.classList.add('hidden');
@@ -102,6 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (logoutBtn) {
         logoutBtn.addEventListener('click', () => {
             // Show the overlay and display the sign-in form directly
+            welcomeOverlay.style.animation = '';
             welcomeOverlay.classList.remove('hidden');
             document.querySelector('.welcome-content').classList.add('hidden');
             loginForm.classList.remove('hidden');
@@ -110,7 +119,18 @@ document.addEventListener('DOMContentLoaded', () => {
             loginError.classList.add('hidden');
             // hide logout until next successful login
             logoutBtn.classList.add('hidden');
+            if (loginMessage) {
+                loginMessage.classList.add('hidden');
+            }
             loginUsername.focus();
+        });
+    }
+
+    if (continueBtn) {
+        continueBtn.addEventListener('click', () => {
+            if (loginMessage) {
+                loginMessage.classList.add('hidden');
+            }
         });
     }
 
@@ -158,6 +178,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Surprise Button
     const surpriseBtn = document.getElementById('surprise-btn');
     const surpriseContent = document.getElementById('surprise-content');
+    const brushBtn = document.getElementById('brush-btn');
+    const brushContent = document.getElementById('brush-content');
 
     surpriseBtn.addEventListener('click', () => {
         surpriseContent.classList.toggle('hidden');
@@ -169,6 +191,19 @@ document.addEventListener('DOMContentLoaded', () => {
             surpriseBtn.textContent = 'Close';
         } else {
             surpriseBtn.textContent = 'Click for a small thing';
+        }
+    });
+
+    brushBtn.addEventListener('click', () => {
+        brushContent.classList.toggle('hidden');
+        if (!brushContent.classList.contains('hidden')) {
+            brushContent.style.opacity = '0';
+            setTimeout(() => {
+                brushContent.style.opacity = '1';
+            }, 10);
+            brushBtn.textContent = 'Close message';
+        } else {
+            brushBtn.textContent = 'Iza ma3aya 7obk';
         }
     });
 
@@ -185,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    document.querySelectorAll('.memory-card, .vibe-text, .glass-card').forEach(el => {
+    document.querySelectorAll('.memory-card, .vibe-text, .glass-card, .wgod-card').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(20px)';
         el.style.transition = 'all 0.8s ease-out';
