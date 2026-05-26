@@ -256,9 +256,10 @@ nav {
     align-items: center;
     justify-content: center;
     position: relative;
-    background-image: url('C:/Users/seif.wessam/.gemini/antigravity/brain/32c37fec-4e31-434a-a35a-b0e710d2d2e8/atmospheric_hero_background_1778698461092.png');
+    background-image: linear-gradient(180deg, rgba(10,10,10,0.65), rgba(10,10,10,0.95)), url('images/her4-photo.jpg.jpg');
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
 }
 
 .hero-overlay {
@@ -344,7 +345,10 @@ h2 {
 }
 
 .card-image {
+    display: block;
+    width: 100%;
     height: 250px;
+    object-fit: cover;
     background: #1a1a1a;
     margin-bottom: 1.5rem;
     border-radius: 8px;
